@@ -5,6 +5,7 @@ const Quiz = () => {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [actualQuestion, setActualQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  let [selectedAnswerTarget, setSelectedAnswerTarget] = useState(null);
 
   const questions = [
     {
@@ -32,11 +33,29 @@ const Quiz = () => {
     },
   ];
 
+  function handleClickAnswer(e, index) {
+    setSelectedAnswer(index);
+    setSelectedAnswerTarget(e);
+    let allQuestions = document.querySelectorAll(".answer-item-selected");
+
+    for (let question = 0; question < allQuestions.length; question++) {
+      allQuestions[question].classList.remove("answer-item-selected");
+      allQuestions[question].classList.add("answer-item");
+    }
+
+    e.target.className = "answer-item-selected";
+  }
+
   function verifyCorrectAnswer() {
     let correctAnswer = questions[actualQuestion].correctOptionIndex;
 
     if (selectedAnswer === correctAnswer) {
       setCorrectAnswers(correctAnswers + 1);
+      setSelectedAnswer(null);
+      selectedAnswerTarget.target.className = "answer-item-correct";
+    } else {
+      setSelectedAnswer(null);
+      selectedAnswerTarget.target.className = "answer-item-incorrect";
     }
   }
 
@@ -50,12 +69,8 @@ const Quiz = () => {
         <div className="answers-container">
           {questions[actualQuestion].options.map((item, index) => (
             <button
-              onClick={() => setSelectedAnswer(index)}
-              className={
-                selectedAnswer === index
-                  ? "answer-item-selected"
-                  : "answer-item"
-              }
+              onClick={(e) => handleClickAnswer(e, index)}
+              className="answer-item"
               key={item}
             >
               {item}
@@ -63,10 +78,24 @@ const Quiz = () => {
           ))}
         </div>
         <div className="action-btns">
-          <button onClick={() => verifyCorrectAnswer()} className="confirm">
+          <button
+            onClick={() => verifyCorrectAnswer()}
+            className={
+              selectedAnswer !== null && selectedAnswerTarget
+                ? "confirm"
+                : "confirm-none"
+            }
+          >
             Confirm
           </button>
-          <button onClick={() => goNextQuestion()} className="next">
+          <button
+            onClick={() => goNextQuestion()}
+            className={
+              selectedAnswer === null && selectedAnswerTarget
+                ? "next"
+                : "next-none"
+            }
+          >
             Next
           </button>
         </div>

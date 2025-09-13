@@ -45,7 +45,23 @@ body {
     background-color: rgb(236, 236, 236);
     border-radius: 10px;
     padding: 10px;
-    border: solid 2px rgb(0, 60, 255);
+    border: solid 2px rgb(0, 40, 173);
+}
+
+.answer-item-correct {
+    font-size: 1.5rem;
+    background-color: rgb(236, 236, 236);
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 2px rgb(0, 255, 76);
+}
+
+.answer-item-incorrect {
+    font-size: 1.5rem;
+    background-color: rgb(236, 236, 236);
+    border-radius: 10px;
+    padding: 10px;
+    border: solid 2px rgb(255, 8, 0);
 }
 
 .action-btns {
@@ -61,10 +77,18 @@ body {
     border: none;
 }
 
+.confirm {
+
+}
+
 .confirm-none {
     display: none;
 }
 
 .next {
+    
+}
+
+.next-none {
     display: none;
 }
