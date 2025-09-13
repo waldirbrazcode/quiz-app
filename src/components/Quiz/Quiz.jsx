@@ -51,7 +51,11 @@ const Quiz = () => {
           {questions[actualQuestion].options.map((item, index) => (
             <button
               onClick={() => setSelectedAnswer(index)}
-              className="answer-item"
+              className={
+                selectedAnswer === index
+                  ? "answer-item-selected"
+                  : "answer-item"
+              }
               key={item}
             >
               {item}
@@ -66,7 +70,6 @@ const Quiz = () => {
             Next
           </button>
         </div>
-        <p>{correctAnswers}</p>
       </div>
     </>
   );
