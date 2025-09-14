@@ -5,6 +5,7 @@ const Quiz = () => {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [actualQuestion, setActualQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [clickedConfirm, setClickedConfirm] = useState(false);
   let [selectedAnswerTarget, setSelectedAnswerTarget] = useState(null);
 
   const questions = [
@@ -47,6 +48,7 @@ const Quiz = () => {
   }
 
   function verifyCorrectAnswer() {
+    setClickedConfirm(true);
     let correctAnswer = questions[actualQuestion].correctOptionIndex;
 
     if (selectedAnswer === correctAnswer) {
@@ -61,6 +63,8 @@ const Quiz = () => {
 
   function goNextQuestion() {
     setActualQuestion(actualQuestion + 1);
+    setClickedConfirm(false);
+    setSelectedAnswerTarget(null);
   }
   return (
     <>
@@ -69,7 +73,11 @@ const Quiz = () => {
         <div className="answers-container">
           {questions[actualQuestion].options.map((item, index) => (
             <button
-              onClick={(e) => handleClickAnswer(e, index)}
+              onClick={
+                clickedConfirm === true
+                  ? null
+                  : (e) => handleClickAnswer(e, index)
+              }
               className="answer-item"
               key={item}
             >
@@ -80,11 +88,7 @@ const Quiz = () => {
         <div className="action-btns">
           <button
             onClick={() => verifyCorrectAnswer()}
-            className={
-              selectedAnswer !== null && selectedAnswerTarget
-                ? "confirm"
-                : "confirm-none"
-            }
+            className={selectedAnswer !== null ? "confirm" : "confirm-none"}
           >
             Confirm
           </button>
