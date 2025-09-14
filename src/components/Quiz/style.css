@@ -77,18 +77,6 @@ body {
     border: none;
 }
 
-.confirm {
-
-}
-
-.confirm-none {
-    display: none;
-}
-
-.next {
-    
-}
-
-.next-none {
+.none {
     display: none;
 }

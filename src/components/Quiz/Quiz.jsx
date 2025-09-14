@@ -19,7 +19,7 @@ const Quiz = () => {
 
     {
       id: 2,
-      question: "Who is the president from Brazil? ",
+      question: "Who is the president of Brazil? ",
       options: ["Jair Bolsonaro", "Ciro Gomes", "Michel Temer", "Lula"],
       correctOptionIndex: 3,
       correctOption: "Lula",
@@ -66,6 +66,17 @@ const Quiz = () => {
     setClickedConfirm(false);
     setSelectedAnswerTarget(null);
   }
+
+  if (actualQuestion >= questions.length) {
+    return (
+      <div className="container">
+        <div className="pontuation">
+          {`${correctAnswers}/${questions.length}`}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="container">
@@ -88,7 +99,7 @@ const Quiz = () => {
         <div className="action-btns">
           <button
             onClick={() => verifyCorrectAnswer()}
-            className={selectedAnswer !== null ? "confirm" : "confirm-none"}
+            className={selectedAnswer !== null ? "action-btns" : "none"}
           >
             Confirm
           </button>
@@ -96,8 +107,8 @@ const Quiz = () => {
             onClick={() => goNextQuestion()}
             className={
               selectedAnswer === null && selectedAnswerTarget
-                ? "next"
-                : "next-none"
+                ? "action-btns"
+                : "none"
             }
           >
             Next
