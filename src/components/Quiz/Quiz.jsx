@@ -49,9 +49,9 @@ const Quiz = () => {
 
   function verifyCorrectAnswer() {
     setClickedConfirm(true);
-    let correctAnswer = questions[actualQuestion].correctOptionIndex;
+    let correctAnswerIndex = questions[actualQuestion].correctOptionIndex;
 
-    if (selectedAnswer === correctAnswer) {
+    if (selectedAnswer === correctAnswerIndex) {
       setCorrectAnswers(correctAnswers + 1);
       setSelectedAnswer(null);
       selectedAnswerTarget.target.className = "answer-item-correct";
@@ -71,7 +71,7 @@ const Quiz = () => {
     return (
       <div className="container">
         <div className="pontuation">
-          {`${correctAnswers}/${questions.length}`}
+          {`${correctAnswers}/${questions.length} Correct answers!`}
         </div>
       </div>
     );
