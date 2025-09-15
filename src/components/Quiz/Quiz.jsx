@@ -32,6 +32,19 @@ const Quiz = () => {
       correctOptionIndex: 1,
       correctOption: "North America",
     },
+
+    {
+      id: 4,
+      question: "Who's the creator of this Quiz? ",
+      options: [
+        "Elon Musk",
+        "waldirbrazcode😎",
+        "Bill Gates",
+        "AI Generated it",
+      ],
+      correctOptionIndex: 1,
+      correctOption: "waldirbrazcode😎",
+    },
   ];
 
   function handleClickAnswer(e, index) {
